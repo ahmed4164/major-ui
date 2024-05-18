@@ -9,6 +9,7 @@ import { GrResources } from "react-icons/gr";
 import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useLogout } from '../../hooks/useLogout';
+// import logo from '../../assets/DSDSD.png'; 
 // import { useGlobalState } from '../../routes/GlobalStateContext';
 
 const Sidebar = () => {
@@ -45,7 +46,7 @@ const Sidebar = () => {
       onMouseLeave={handleMouseLeave}
     >
 
-      <div className="h-full bg-white dark:bg-gray-lighter ">
+      <div className="h-full bg-gray-lighter ">
         <div className="flex items-center justify-center h-10 border ">
           {/* <svg width="35" height="30" viewBox="0 0 256 366" version="1.1" preserveAspectRatio="xMidYMid">
             <defs>
@@ -68,10 +69,12 @@ const Sidebar = () => {
           {/* {
             isExpanded ? ( */}
           <>
-            <h1 className={`dark:text-gray-200 text-2xl uppercase font-bold transition-all duration-500 ${isExpanded ? 'opacity-100' : 'opacity-0'}`}
+            {/* <h1 className={`dark:text-gray-200 text-2xl uppercase font-bold transition-all duration-500 ${isExpanded ? 'opacity-100' : 'opacity-0'}`}
               style={{ visibility: isExpanded ? 'visible' : 'hidden' }}>
               classroom
-            </h1>
+            </h1> */}
+            {/* <img src={logo} alt="Logo" />*/}
+
           </>
           {/* ) : null
           } */}

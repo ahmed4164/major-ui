@@ -7,8 +7,12 @@ const Signup = () => {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
+    const [selectedRole, setSelectedRole] = useState('student');
     const { signup, error, isLoading } = useSignup()
 
+    const handleRoleChange = (role) => {
+        setSelectedRole(role);
+    };
     const handleChange = (e) => {
         setEmail(e.target.value);
     };
@@ -22,7 +26,7 @@ const Signup = () => {
     const doSignup = async (e) => {
         e.preventDefault()
 
-        await signup(name, email, password)
+        await signup(name, email, password, selectedRole)
     }
     // const { login } = AuthData();
     const [formData, setFormData] = useReducer((formData, newItem) => { return ({ ...formData, ...newItem }) }, { userName: "", password: "" })
@@ -64,27 +68,84 @@ const Signup = () => {
                             <h1 className="text-2xl font-extrabold text-white">
                                 Student Sign up
                             </h1>
-                            <p className="text-[12px] text-gray-500 inline-flex items-center text-xs font-thin text-center hover:text-gray-700 dark:text-gray-100 dark:hover:text-white">
+                            <h3 className="text-[12px] inline-flex items-center text-xs font-thin text-center text-gray-100 hover:text-white">
                                 Hey enter your details to create your account
-                            </p>
+                            </h3>
                         </div>
                         <div className="w-full flex-1 mt-8">
                             <div className="mx-auto max-w-xs flex flex-col gap-4">
-                                {/* <input
-                                    className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                                    type="text"
-                                    placeholder="Enter your name"
-                                />
-                                <input
-                                    className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                                    type="email"
-                                    placeholder="Enter your email"
-                                />
-                                <input
-                                    className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                                    type="tel"
-                                    placeholder="Enter your phone"
-                                /> */}
+                                <ul className="grid w-full gap-6 md:grid-cols-2">
+                                    <li>
+                                        <input
+                                            type="radio"
+                                            id="hosting-small"
+                                            name="hosting"
+                                            value="hosting-small"
+                                            className="hidden peer"
+                                            required
+                                            checked={selectedRole === 'student'}
+                                            onChange={() => handleRoleChange('student')}
+                                        />
+                                        <label
+                                            htmlFor="hosting-small"
+                                            className="inline-flex items-center border-2 border-gray-lighter justify-between w-full rounded-lg cursor-pointer hover:text-gray-300 peer-checked:text-purple-600 peer-checked:border-purple-600 text-gray-400 bg-gray-darker hover:bg-gray-900 p-2"
+                                        >
+                                            <div className="block">
+                                                <div className="w-full">Student</div>
+                                            </div>
+                                            <svg
+                                                className="w-5 h-5 ms-3 rtl:rotate-180"
+                                                aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 14 10"
+                                            >
+                                                <path
+                                                    stroke="currentColor"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth="2"
+                                                    d="M1 5h12m0 0L9 1m4 4L9 9"
+                                                />
+                                            </svg>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <input
+                                            type="radio"
+                                            id="hosting-big"
+                                            name="hosting"
+                                            value="hosting-big"
+                                            className="hidden peer"
+                                            checked={selectedRole === 'teacher'}
+                                            onChange={() => handleRoleChange('teacher')}
+                                        />
+                                        <label
+                                            htmlFor="hosting-big"
+                                            className="inline-flex items-center justify-between w-full p-2 border-2 border-gray-lighter  rounded-lg cursor-pointer hover:text-gray-300 bg-gray-darker peer-checked:text-purple-600 peer-checked:border-purple-600 text-gray-400 hover:bg-gray-900"
+                                        >
+                                            <div className="block">
+                                                <div className="w-full">Teacher</div>
+                                            </div>
+                                            <svg
+                                                className="w-5 h-5 ms-3 rtl:rotate-180"
+                                                aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 14 10"
+                                            >
+                                                <path
+                                                    stroke="currentColor"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth="2"
+                                                    d="M1 5h12m0 0L9 1m4 4L9 9"
+                                                />
+                                            </svg>
+                                        </label>
+                                    </li>
+                                </ul>
+
                                 <div className="flex flex-col">
                                     <div className="flex relative ">
                                         <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-gray-darker border-l border-b  border-gray-lighter text-gray-500 shadow-sm text-sm">
@@ -104,7 +165,7 @@ const Signup = () => {
                                                 </path>
                                             </svg>
                                         </span>
-                                        <input type="email" id="email" className=" rounded-r-lg flex-1 appearance-none border border-gray-lighter w-full py-2 px-4 bg-gray-darker text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Enter email"  onChange={handleChange} />
+                                        <input type="email" id="email" className=" rounded-r-lg flex-1 appearance-none border border-gray-lighter w-full py-2 px-4 bg-gray-darker text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Enter email" onChange={handleChange} />
                                     </div>
                                 </div>
                                 <div className="flex flex-col mb-6">
@@ -136,15 +197,15 @@ const Signup = () => {
                                 <button type="submit" onClick={doSignup} className="py-2 px-4  bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
                                     Sign Up
                                 </button>
-                                <p className="mt-6 text-xs  text-center  
+                                <h3 className="mt-6 text-xs  text-center  
                 
-                text-[12px] text-gray-500 items-center font-thin hover:text-gray-700 dark:text-gray-100 dark:hover:text-white
+                text-[12px] items-center font-thin text-gray-100 hover:text-white
                 ">
                                     Already have an account?{" "}
                                     <Link to={'/login'}>
                                         <span className="font-semibold text-gray-100 underline">Sign in</span>
                                     </Link>
-                                </p>
+                                </h3>
                             </div>
                         </div>
                     </div>

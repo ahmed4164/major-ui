@@ -1,7 +1,7 @@
 import { useReducer, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 // import { AuthData } from "../../services/auth/index"
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { InputWrapper, ButtonPrimary } from "../../components";
 import { registerTeacher, loginTeacher } from "../../services/api/client";
 import { saveToken, saveUserDetails } from "../../services/async-storage";
@@ -12,7 +12,7 @@ const Login = () => {
     const [isFocused, setIsFocused] = useState(false);
     const [isPasswordFocused, setIsPasswordFocused] = useState(false);
 
-    const {login, error, isLoading} = useLogin()
+    const { login, error, isLoading } = useLogin()
 
     const handleFocus = () => {
         setIsFocused(true);
@@ -57,9 +57,9 @@ const Login = () => {
     // }
     const doLogin = async (e) => {
         e.preventDefault()
-    
+
         await login(email, password)
-      }
+    }
 
     return (
         // <div className="heroContainer h-dvh">
@@ -108,9 +108,9 @@ const Login = () => {
         //         </ButtonPrimary>
         //     </div>
         // </div>
-        <div className=" flex justify-center items-center flex-col h-full w-full ">
-            <div className="flex flex-col w-full max-w-md px-4 py-8 bg-white rounded-2xl shadow dark:bg-gray-darker sm:px-6 md:px-8 lg:px-10 border-2 border-gray-lighter">
-                <div className="self-center mb-6 text-xl font-light text-gray-600 sm:text-2xl dark:text-white">
+        <div className=" flex flex-col h-full w-full justify-center items-center">
+            <div className="flex flex-col w-full max-w-sm px-4 py-8 bg-gray-darker rounded-2xl shadow  sm:px-6 md:px-8 lg:px-10 border-2 border-gray-lighter ">
+                <div className="self-center mb-6 text-xl font-light sm:text-2xl text-white">
                     Login
                 </div>
                 {/* <label className="flex items-center mb-3 space-x-3">
@@ -119,6 +119,7 @@ const Login = () => {
                         Gray
                     </span>
                 </label> */}
+                
                 <div className="mt-8">
                     <form action="#" autoComplete="off">
                         <div className="flex flex-col mb-2">
@@ -132,7 +133,7 @@ const Login = () => {
                                 <input
                                     type="text"
                                     id="sign-in-email"
-                                    className={`rounded-r-lg flex-1 appearance-none border border-gray-lighter w-full py-2 px-4 bg-gray-darker text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent ${isFocused ? 'ring-2 ring-purple-600' : ''}`}
+                                    className={`rounded-r-lg flex-1 appearance-none border border-gray-lighter w-full py-2 px-4 bg-gray-darker text-white placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent ${isFocused ? 'ring-2 ring-purple-600' : ''}`}
                                     placeholder="Enter email"
                                     onChange={handleChange}
                                     onFocus={handleFocus}
@@ -151,9 +152,9 @@ const Login = () => {
                                     </svg>
                                 </span>
                                 <input type="password" id="sign-in-password" className={`
-                                rounded-r-lg flex-1 appearance-none border border-gray-lighter w-full py-2 px-4 bg-gray-darker text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Your password  ${isPasswordFocused ? 'ring-2 ring-purple-600' : ''}
+                                rounded-r-lg flex-1 appearance-none border border-gray-lighter w-full py-2 px-4 bg-gray-darker text-white placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Your password  ${isPasswordFocused ? 'ring-2 ring-purple-600' : ''}
                                 `}
-                                placeholder="Enter password"
+                                    placeholder="Enter password"
                                     onChange={handlePasswordChange}
                                     onFocus={handlePasswordFocus}
                                     onBlur={handlePasswordBlur}
@@ -162,7 +163,7 @@ const Login = () => {
                         </div>
                         <div className="flex items-center mb-6 -mt-4">
                             <div className="flex ml-auto">
-                                <a href="#" className="inline-flex text-xs font-thin text-gray-500 sm:text-sm dark:text-gray-100 hover:text-gray-700 dark:hover:text-white">
+                                <a href="#" className="inline-flex text-xs font-thin sm:text-sm text-gray-100 hover:text-white">
                                     Forgot Your Password?
                                 </a>
                             </div>
@@ -179,7 +180,7 @@ const Login = () => {
                     </form>
                 </div>
                 <div className="flex items-center justify-center mt-6">
-                    <Link to={'/signup'} className="inline-flex items-center text-xs font-thin text-center text-gray-500 hover:text-gray-700 dark:text-gray-100 dark:hover:text-white">
+                    <Link to={'/signup'} className="inline-flex items-center text-xs font-thin text-center text-white hover:text-white">
                         <span className="ml-2">
                             You don&#x27;t have an account?
                         </span>

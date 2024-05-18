@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { Login, Dashboard, AddClassroom, Signup } from './pages/index';
+import { Login, Dashboard, AddClassroom, Signup, ClassroomOverview } from './pages/index';
 import { useAuthContext } from './hooks/useAuthContext';
 export default function App() {
   const { user } = useAuthContext()
@@ -32,6 +32,10 @@ export default function App() {
         <Route
           path="/addclassroom"
           element={user ? <AddClassroom /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/classroomoverview"
+          element={user ? <ClassroomOverview /> : <Navigate to="/login" />}
         />
       </Routes>
     </Router>

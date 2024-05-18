@@ -1,3 +1,5 @@
+const baseURL = "https://major-rest-apis.onrender.com/"
+import FetchData from "./model";
 async function makeRequest(url, method, data) {
     console.log('@@data',data)
     const options = {
@@ -30,7 +32,7 @@ async function makeRequest(url, method, data) {
 
 // Function to register a teacher
 export async function registerTeacher(name, email, password) {
-    const url = 'https://major-rest-apis.onrender.com/register/teacher';
+    const url = `${baseURL}register/teacher`;
     const data = { name, email, password };
 
     try {
@@ -41,6 +43,27 @@ export async function registerTeacher(name, email, password) {
         throw error;
     }
 }
+// export async function createClassroom(input) {
+//     const url = `${baseURL}classroom`;
+//     const data = input;
+
+//     try {
+//         const responseData = await makeRequest(url, 'POST', data);
+//         console.log('classroom created:', responseData);
+//         return responseData;
+//     } catch (error) {
+//         throw error;
+//     }
+// }
+export const createClassroom = async (input) => {
+    try {
+      const result = await FetchData("classroom", input);
+      return result;
+    } catch (error) {
+      console.error('Error fetching data in forms.js:', error);
+      throw error;
+    }
+  };
 
 // Function to login a teacher
 export async function loginTeacher(email, password) {
