@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Sidebar, Header, ClassroomContainer } from '../../components'
+import { Sidebar, Header, ClassroomContainer, Loader, useLoader } from '../../components'
 import { getClassrooms } from '../../services/api/client'
 import { getUserDetails } from '../../services/async-storage';
 import { BsBuildingFillAdd } from "react-icons/bs";
@@ -7,10 +7,12 @@ import { ButtonPrimary } from '../../components';
 
 import { connect } from 'react-redux';
 import { fetchClassrooms } from '../../actions/classroomActions';
+
 // import { setUserDetails } from '../../actions/userActions';
 const Dashboard = ({ classrooms, error, fetchClassrooms }) => {
     const [classRoomData, setClassRoomData] = useState()
     const [userDetails, setUserDetails] = useState()
+    const { isLoading, showLoader, dismissLoader } = useLoader();
     // useEffect(() => {
     //     const userDetailss = getUserDetails()
     //     console.log('@@userDetails', userDetailss)
@@ -35,6 +37,7 @@ const Dashboard = ({ classrooms, error, fetchClassrooms }) => {
     const [userId, setUserId] = useState(null);
     useEffect(() => {
         const fetchUserAndClassrooms = async () => {
+            showLoader();
             const userDetails = await getUserDetails();
             setUserDetails(userDetails)
             console.log('@@userDetails',userDetails)
@@ -42,16 +45,19 @@ const Dashboard = ({ classrooms, error, fetchClassrooms }) => {
                 setUserId(userDetails.userId);
                 fetchClassrooms(userDetails.userId);
             }
+            dismissLoader();
         };
 
         fetchUserAndClassrooms();
     }, [fetchClassrooms]);
-    // console.log('@@classroomdata', classRoomData)
+    console.log('@@isLoading', isLoading)
     // console.log('@@userDetails', userDetails?.type)
     useEffect(()=>{
         setClassRoomData(classrooms)
+        dismissLoader();
     },[classrooms])
     if (error) {
+        dismissLoader();
         return <p>Error: {error}</p>;
       }
       console.log('@@classrooms',classrooms)
@@ -61,6 +67,7 @@ const Dashboard = ({ classrooms, error, fetchClassrooms }) => {
                 <div className="z-50">
                     <Sidebar />
                 </div>
+                {isLoading && <Loader />}
                 <div className=" flex flex-col w-full pl-0 md:p-4 md:space-y-4">
                     <Header />
                     <div className="h-screen pt-2 pb-24 pl-2 pr-2 overflow-auto md:pt-0 md:pr-0 md:pl-0">
