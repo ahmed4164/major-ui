@@ -5,6 +5,7 @@ import './index.css'
 import { Provider } from 'react-redux';
 import { AuthContextProvider } from './routes/GlobalStateContext.jsx'
 import configureStore from './store/configureStore.jsx';
+import {Loader} from './components/index.jsx'; // Import your Loader component
 
 const store = configureStore();
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -12,6 +13,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <AuthContextProvider>
       <div className="dark: bg-gray-darker ">
       <Provider store={store}>
+        {/* <Loader /> */}
         <App />
       </Provider>
       </div>

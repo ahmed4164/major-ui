@@ -97,6 +97,7 @@ const Header = () => {
                 <Modal show={openModal} className='border-2' size="md" onClose={onCloseModal} popup>
                     <Modal.Header className='bg-gray-darker ' />
                     <Modal.Body className='border-2 bg-gray-darker border-gray-lighter'>
+                        <>
                         <div className="space-y-6 ">
                             <h3 className="text-xl font-medium  text-white ">Create a classroom</h3>
                             <div>
@@ -162,6 +163,10 @@ const Header = () => {
                                 </a>
                             </div> */}
                         </div>
+                        <div>
+                            
+                        </div>
+                        </>
                     </Modal.Body>
                 </Modal>
 
