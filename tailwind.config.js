@@ -11,6 +11,9 @@ export default {
         transparent: 'transparent',
         current: 'currentColor',
         white: '#FFFFFF',
+        bggray:'#f3f4f6',
+        hovercolor:'#e2e3e5',
+        headertext:'#18181B',
         // Gray Colors
         'gray-dark': '#595959', /* Dark Gray */
         'gray-darker': '#161616', /* Dark Gray */

@@ -8,7 +8,7 @@ import { useAuthContext } from './hooks/useAuthContext';
 export default function App() {
   const { user } = useAuthContext()
   return (
-    <div className='h-screen'>
+    <div className='bg-bggray h-screen'>
     <Router>
       <Routes>
         {/* <Route path='/' element={<Navigate to="/login" />} /> 

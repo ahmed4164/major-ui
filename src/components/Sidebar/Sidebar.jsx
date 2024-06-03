@@ -9,10 +9,11 @@ import { GrResources } from "react-icons/gr";
 import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useLogout } from '../../hooks/useLogout';
+import { RxHamburgerMenu } from "react-icons/rx";
 // import logo from '../../assets/DSDSD.png'; 
 // import { useGlobalState } from '../../routes/GlobalStateContext';
 
-const Sidebar = () => {
+const Sidebar = ({isVisible}) => {
   const [isExpanded, setIsExpanded] = useState(false)
   // var navigate = useNavigate()
   // const { isLoggedIn, logout } = useGlobalState();
@@ -41,12 +42,12 @@ const Sidebar = () => {
   }
 
   return (
-    <div className={`relative hidden h-screen shadow-lg lg:block transition-all duration-250 overflow-hidden ${isExpanded ? 'w-60' : 'w-14'}`}
+    <div className={` ${isVisible ? 'block' : 'hidden'} h-screen shadow-lg lg:block transition-all duration-250 overflow-hidden ${isExpanded ? 'w-60' : 'w-14'}`}
       onMouseEnter={handleHover}
       onMouseLeave={handleMouseLeave}
     >
 
-      <div className="h-full bg-gray-lighter ">
+      <div className="h-full bg-bggray ">
         <div className="flex items-center justify-center h-10 border ">
           {/* <svg width="35" height="30" viewBox="0 0 256 366" version="1.1" preserveAspectRatio="xMidYMid">
             <defs>
@@ -155,7 +156,7 @@ const Sidebar = () => {
             </a> */}
           </div>
           {/* <div className="border-2 ,border-sky-50"></div> */}
-          <div className="mb-20 border-emerald-300 border-2 justify-center items-center">
+          <div className="mb-20 justify-center items-center">
           <a className="flex items-center justify-start w-full p-4 my-2 font-thin text-gray-500 uppercase transition-colors duration-200 dark:text-gray-200 hover:text-blue-500" href="#"
             >
               <span className="text-left">

@@ -6,6 +6,7 @@ import { InputWrapper, ButtonPrimary } from "../../components";
 import { registerTeacher, loginTeacher } from "../../services/api/client";
 import { saveToken, saveUserDetails } from "../../services/async-storage";
 import { useLogin } from "../../hooks/useLogin";
+import { Toaster, toast } from 'sonner'
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -57,8 +58,24 @@ const Login = () => {
     // }
     const doLogin = async (e) => {
         e.preventDefault()
-
-        await login(email, password)
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email) {
+            toast.error('Please enter an email address');
+            return;
+        }
+        if (!emailRegex.test(email)) {
+            toast.error('Please enter a valid email address');
+            return;
+        }
+        if(!password){
+            toast.error('Please enter password');
+            return
+        }
+        const jsondata = await login(email, password)
+        if(jsondata?.message){
+            toast.error(jsondata?.message);
+            return
+        }
     }
 
     return (
@@ -109,6 +126,7 @@ const Login = () => {
         //     </div>
         // </div>
         <div className=" flex flex-col h-full w-full justify-center items-center">
+             <Toaster closeButton={true} richColors duration={2000} position="top-center" />
             <div className="flex flex-col w-full max-w-sm px-4 py-8 bg-gray-darker rounded-2xl shadow  sm:px-6 md:px-8 lg:px-10 border-2 border-gray-lighter ">
                 <div className="self-center mb-6 text-xl font-light sm:text-2xl text-white">
                     Login
