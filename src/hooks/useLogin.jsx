@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useAuthContext } from './useAuthContext'
+import { toast } from 'sonner'
 
 export const useLogin = () => {
   const [error, setError] = useState(null)
@@ -20,6 +21,9 @@ export const useLogin = () => {
     if (!json.isSuccess) {
       setIsLoading(false)
       setError(json.error)
+    }
+    if (json?.message) {
+      return json
     }
     console.log('@@resp',json)
     if (json.isSuccess) {

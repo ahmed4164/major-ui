@@ -94,3 +94,29 @@ export async function getClassrooms(teacherid) {
         throw error;
     }
 }
+export async function getStudents(teacherid) {
+    console.log('@@getclass',teacherid)
+    const url = 'https://major-rest-apis.onrender.com/students';
+    const data = { 
+        teacherId: teacherid
+    };
+
+    try {
+        const responseData = await makeRequest(url, 'POST', data);
+        return responseData;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export async function getColleges() {
+    const url = 'https://api.data.gov.in/resource/44bea382-c525-4740-8a07-04bd20a99b52?api-key=579b464db66ec23bdd000001901f96ff01d94c6b58bc2949f9576916&format=json&limit=1000&filters%5Buniversity_name%5D=Osmania%20University%2C%20Hyderabad%20(Id%3A%20U-0027)&filters%5Bstate_name%5D=Telangana';
+
+    try {
+        const responseData = await makeRequest(url, 'GET', null);
+        console.log('get colleges:', JSON.stringify(responseData));
+        return responseData;
+    } catch (error) {
+        throw error;
+    }
+}

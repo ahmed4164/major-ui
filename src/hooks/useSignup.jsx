@@ -6,17 +6,21 @@ export const useSignup = () => {
   const [isLoading, setIsLoading] = useState(null)
   const { dispatch } = useAuthContext()
 
-  const signup = async (name, email, password, selectedRole) => {
+    // branch,
+        // section,
+        // year
+  const signup = async (name, email, password, selectedRole, selectedCollege, collegeCode, branch, section, year ) => {
     setIsLoading(true)
     setError(null)
-    console.log('@@inp',{name, email, password,type: selectedRole})
+    console.log('@@inp',{name, email, password,type: selectedRole,  collegecode:collegeCode,
+      collegename:selectedCollege, branch, section, year})
 
     const response = await fetch('https://major-rest-apis.onrender.com/register', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({name, email, password, type:selectedRole})
+      body: JSON.stringify({ name, email, password, type:selectedRole, collegecode:collegeCode,
+        collegename:selectedCollege, branch, section, year })
     })
-    console.log('@@response',response)
     const json = await response.json()
 
     if (!json.isSuccess) {
